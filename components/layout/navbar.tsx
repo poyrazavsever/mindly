@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaGithub } from 'react-icons/fa'
+import { supabase } from '@/lib/supabaseClient'
 
 const Navbar = () => {
-
     const linkStyle = 'text-neutral-200 hover:text-white transition-colors font-medium'
+    const [user, setUser] = useState<any>(null)
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { data } = await supabase.auth.getUser()
+            setUser(data.user)
+        }
+        getUser()
+        // Oturum değişikliklerini dinle
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null)
+        })
+        return () => {
+            listener.subscription.unsubscribe()
+        }
+    }, [])
 
     return (
         <nav className='py-8 flex items-center justify-between'>
@@ -12,7 +28,7 @@ const Navbar = () => {
 
                 {/* Logo */}
                 <a href="/" className='flex items-center gap-2'>
-                    <img src="/images/logo.png" alt="Mindly Logo" className='w-8 h-8 pb-1'/>
+                    <img src="/images/logo.png" alt="Mindly Logo" className='w-8 h-8 pb-1' />
                     <span className='text-xl font-extrabold'>Mindly</span>
                 </a>
 
@@ -38,20 +54,31 @@ const Navbar = () => {
                     <FaGithub />
                     <span className='text-xs'>GitHub</span>
                 </a>
-                {/* Sign Up Button */}
-                <a
-                    href="/signup"
-                    className="text-neutral-300 font-medium hover:text-white transition-colors"
-                >
-                    Sign Up
-                </a>
-                {/* Get Started Button */}
-                <a
-                    href="/login"
-                    className="px-4 py-1 bg-primary text-secondary rounded-full font-medium hover:bg-primary/80 transition-colors"
-                >
-                    Get Started
-                </a>
+                {!user ? (
+                    <>
+                        {/* Sign Up Button */}
+                        <a
+                            href="/signup"
+                            className="text-neutral-300 font-medium hover:text-white transition-colors"
+                        >
+                            Sign Up
+                        </a>
+                        {/* Get Started Button */}
+                        <a
+                            href="/login"
+                            className="px-4 py-1 bg-primary text-secondary rounded-full font-medium hover:bg-primary/80 transition-colors"
+                        >
+                            Get Started
+                        </a>
+                    </>
+                ) : (
+                    <a
+                        href="/dashboard"
+                        className="px-4 py-1 bg-primary text-secondary rounded-full font-medium hover:bg-primary/80 transition-colors"
+                    >
+                        Dashboard
+                    </a>
+                )}
             </div>
         </nav>
     )
