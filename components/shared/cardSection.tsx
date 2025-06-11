@@ -5,22 +5,22 @@ const agents = [
     {
         icon: <FaBrain size={32} className="text-primary" />,
         title: 'Productivity Agent',
-        desc: 'Günlük görevlerinizi planlayın, hatırlatıcılar oluşturun ve verimliliğinizi artırın.',
+        desc: 'Plan your daily tasks, create reminders, and boost your productivity.',
     },
     {
         icon: <FaRobot size={32} className="text-primary" />,
         title: 'Chatbot Agent',
-        desc: 'Sorularınızı yanıtlayan ve sohbet eden kişisel bir asistan oluşturun.',
+        desc: 'Create a personal assistant that answers your questions and chats with you.',
     },
     {
         icon: <FaBookOpen size={32} className="text-primary" />,
         title: 'Knowledge Agent',
-        desc: 'Belirli bir konuda bilgi veren veya kaynak öneren akıllı bir rehber oluşturun.',
+        desc: 'Build a smart guide that provides information or suggests resources on a specific topic.',
     },
     {
         icon: <FaRegLightbulb size={32} className="text-primary" />,
         title: 'Idea Generator',
-        desc: 'Yaratıcı fikirler ve çözümler üreten bir yapay zekâ yardımcısı oluşturun.',
+        desc: 'Create an AI assistant that generates creative ideas and solutions.',
     },
 ]
 
@@ -28,7 +28,7 @@ const CardSection = () => {
     return (
         <section className="w-full py-32 flex flex-col items-center">
             <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
-                Neler Oluşturabilirsin?
+                What Can You Create?
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 w-full max-w-6xl">
                 {agents.map((agent, i) => (
