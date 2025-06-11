@@ -3,7 +3,7 @@ import { FaGoogle, FaGithub } from 'react-icons/fa'
 
 const SignUp = () => {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="border border-secondary rounded-md p-8 w-full max-w-sm flex flex-col gap-6">
         <h2 className="text-2xl font-bold text-primary text-center mb-2">Sign Up to Mindly</h2>
         
@@ -51,4 +51,5 @@ const SignUp = () => {
   )
 }
 
+SignUp.noLayout = true;
 export default SignUp
