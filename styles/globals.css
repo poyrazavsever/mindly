@@ -3,6 +3,14 @@
 @import "tailwindcss";
 
 @theme {
-  --font-nunito: 'Nunito', sans-serif;
+    --color-background: #2D3250;
+    --color-text: #d9defc;
+    --font-nunito: 'Nunito', sans-serif;
+}
+
+body{
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-nunito);
 }
 
