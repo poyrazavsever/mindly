@@ -3,14 +3,15 @@
 @import "tailwindcss";
 
 @theme {
-    --color-background: #2D3250;
-    --color-text: #d9defc;
+    --color-background: #222831;
+    --color-primary: #FFE3C2;
+    --color-secondary:#2D3250;
     --font-nunito: 'Nunito', sans-serif;
 }
 
 body{
     background-color: var(--color-background);
-    color: var(--color-text);
+    color: var(--color-primary);
     font-family: var(--font-nunito);
 }
 
