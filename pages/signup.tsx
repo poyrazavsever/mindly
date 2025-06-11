@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import {useRouter} from 'next/router'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { FaGoogle, FaGithub } from 'react-icons/fa'
 import { supabase } from '@/lib/supabaseClient'
 import toast from 'react-hot-toast'
@@ -7,8 +7,18 @@ import toast from 'react-hot-toast'
 const SignUp = () => {
     const [form, setForm] = useState({ name: '', email: '', password: '' })
     const [loading, setLoading] = useState(false)
-
     const router = useRouter()
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const { data } = await supabase.auth.getUser()
+            if (data.user) {
+                toast('You are already logged in!', { icon: 'ℹ️' })
+                router.replace('/')
+            }
+        }
+        checkUser()
+    }, [router])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value })
