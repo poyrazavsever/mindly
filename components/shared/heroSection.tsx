@@ -29,14 +29,14 @@ const HeroSection = () => {
             </div>
 
             {/* Sağ taraf: Görsel */}
-            <div className="flex flex-col items-end mt-10 md:mt-0 max-w-sm">
+            <div className="flex flex-col items-center mt-10 md:mt-0 max-w-sm">
                 <img
                     src="/images/hero-image.png"
                     alt="Mindly platform illustration"
                     className="max-w-xs md:max-w-md rounded-xl"
                 />
 
-                <div className='w-xs md:w-md h-8 rounded-full bg-gray-500 blur-3xl'/>
+                <div className='w-xs md:w-md h-4 rounded-full bg-gray-50 blur-3xl -z-10'/>
             </div>
 
         </section>
