@@ -6,6 +6,8 @@ export default function Home() {
 
         <HeroSection />
 
+      <img src="/images/dashboard.png" alt="dashboard screen main page " className="w-full mb-4 rounded-xl border border-gray-500"/>
+
     </div>
   );
 }
