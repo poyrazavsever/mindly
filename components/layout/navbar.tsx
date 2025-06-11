@@ -11,9 +11,10 @@ const Navbar = () => {
             <div className='flex items-center gap-8'>
 
                 {/* Logo */}
-                <div className='flex items-center gap-2'>
-                    <a href="/" className='text-xl font-extrabold'>Mindly</a>
-                </div>
+                <a href="/" className='flex items-center gap-2'>
+                    <img src="/images/logo.png" alt="Mindly Logo" className='w-8 h-8 pb-1'/>
+                    <span className='text-xl font-extrabold'>Mindly</span>
+                </a>
 
                 {/* Navigation Links */}
                 <div className='flex items-center gap-4'>
