@@ -28,25 +28,26 @@ const Navbar = () => {
             <div className='flex items-center gap-4'>
                 {/* GitHub Icon */}
                 <a
-                    href="https://github.com/"
+                    href="https://github.com/poyrazavsever/mindly"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-300 hover:text-white text-2xl transition-colors"
+                    className="text-neutral-300 py-1  px-4 rounded-full border border-neutral-400 hover:text-white hover:border-neutral-100 text-base transition-colors flex items-center gap-2"
                     aria-label="GitHub"
                 >
                     <FaGithub />
+                    <span className='text-xs'>GitHub</span>
                 </a>
                 {/* Sign Up Button */}
                 <a
                     href="/signup"
-                    className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-secondary transition-colors"
+                    className="text-neutral-300 font-medium hover:text-white transition-colors"
                 >
                     Sign Up
                 </a>
                 {/* Get Started Button */}
                 <a
-                    href="/get-started"
-                    className="px-4 py-2 bg-primary text-secondary rounded-lg font-semibold hover:bg-[#FFD7B0] transition-colors"
+                    href="/login"
+                    className="px-4 py-1 bg-primary text-secondary rounded-full font-medium hover:bg-primary/80 transition-colors"
                 >
                     Get Started
                 </a>
