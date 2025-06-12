@@ -1,5 +1,7 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { FaRobot, FaComments, FaTasks, FaCalendarAlt, FaLightbulb, FaChartBar, FaCog } from 'react-icons/fa'
+import classNames from 'classnames'
 
 const sidebarLinks = [
   {
@@ -40,6 +42,8 @@ const sidebarLinks = [
 ]
 
 const Sidebar = () => {
+  const router = useRouter()
+
   return (
     <aside className="h-screen w-64 bg-secondary flex flex-col py-8 px-4 border-r border-secondary/40">
       {/* Logo */}
@@ -53,7 +57,12 @@ const Sidebar = () => {
           <a
             key={link.href}
             href={link.href}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-primary/80 hover:bg-primary/10 hover:text-primary transition-colors font-medium"
+            className={classNames(
+              "flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors",
+              router.pathname === link.href
+                ? "bg-primary/10 text-primary"
+                : "text-primary/80 hover:bg-primary/10 hover:text-primary"
+            )}
           >
             {link.icon}
             <span>{link.label}</span>
