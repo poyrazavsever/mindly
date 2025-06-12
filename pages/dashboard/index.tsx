@@ -6,5 +6,5 @@ const Dashboard = () => {
   )
 }
 
-Dashboard.noLayout = true;
+Dashboard.isAdminPage = true;
 export default Dashboard
