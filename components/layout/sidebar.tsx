@@ -45,7 +45,7 @@ const Sidebar = () => {
   const router = useRouter()
 
   return (
-    <aside className="h-screen w-64 bg-secondary flex flex-col py-8 px-4 border-r border-secondary/40">
+    <aside className="absolute left-0 h-screen w-64 bg-secondary flex flex-col py-8 px-4 border-r border-secondary/40">
       {/* Logo */}
       <a href="/" className="flex items-center gap-2 mb-10 px-2">
         <img src="/images/logo.png" alt="Mindly Logo" className="w-8 h-8 pb-1" />
