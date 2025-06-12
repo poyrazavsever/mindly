@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { FaRobot, FaUser, FaPalette } from 'react-icons/fa'
+import { supabase } from '@/lib/supabaseClient'
+import toast from 'react-hot-toast'
 
 const colors = [
     { value: 'red', label: 'Kırmızı', className: 'bg-red-500' },
@@ -29,13 +31,55 @@ const AgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data:
         color: 'blue',
         style: 'helper',
     })
+    const [loading, setLoading] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
+    const handleSave = async (e: React.FormEvent) => {
+        e.preventDefault()
+        // Kontroller
+        if (!form.name || !form.desc) {
+            toast.error('Lütfen tüm alanları doldurun.')
+            return
+        }
+        setLoading(true)
+        // Kullanıcı id'sini al
+        const { data: { user }, error: userError } = await supabase.auth.getUser()
+        if (userError || !user) {
+            toast.error('Kullanıcı bulunamadı.')
+            setLoading(false)
+            return
+        }
+        // Supabase'e kaydet
+        const { error } = await supabase.from('agents').insert([{
+            user_id: user.id,
+            name: form.name,
+            desc: form.desc,
+            icon: form.icon,
+            color: form.color,
+            style: form.style,
+        }])
+        setLoading(false)
+        if (error) {
+            toast.error(error.message)
+        } else {
+            toast.success('Ajan başarıyla oluşturuldu!')
+            onSave?.(form)
+            onClose?.()
+        }
+    }
+
+    // Modal dışına tıklanınca kapat
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            onClose?.()
+        }
+    }
+
     return (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={handleBackdropClick}>
             <div className="bg-secondary rounded-xl p-8 w-full max-w-md shadow-lg relative">
                 <button
                     onClick={onClose}
@@ -44,13 +88,7 @@ const AgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data:
                     ×
                 </button>
                 <h2 className="text-xl font-bold text-primary mb-6 text-center">Yeni Ajanın</h2>
-                <form
-                    className="flex flex-col gap-5"
-                    onSubmit={e => {
-                        e.preventDefault()
-                        onSave?.(form)
-                    }}
-                >
+                <form className="flex flex-col gap-5" onSubmit={handleSave}>
                     <div>
                         <label className="block text-primary mb-1 font-medium">Ajan Adı</label>
                         <input
@@ -121,8 +159,9 @@ const AgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data:
                     <button
                         type="submit"
                         className="w-full py-2 rounded-full bg-primary text-secondary font-semibold hover:bg-primary/90 transition-colors mt-2"
+                        disabled={loading}
                     >
-                        Save
+                        {loading ? 'Kaydediliyor...' : 'Kaydet'}
                     </button>
                 </form>
             </div>
