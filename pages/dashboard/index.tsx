@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, JSX } from 'react'
 import { FaRobot, FaUser, FaPalette } from 'react-icons/fa'
 import AgentModal from '@/components/shared/agentModal'
 import { supabase } from '@/lib/supabaseClient'
