@@ -39,7 +39,7 @@ const AgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data:
             <div className="bg-secondary rounded-xl p-8 w-full max-w-md shadow-lg relative">
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-primary/60 hover:text-primary text-xl"
+                    className="absolute top-4 right-4 text-primary/60 hover:text-primary text-3xl cursor-pointer transition-colors"
                 >
                     ×
                 </button>

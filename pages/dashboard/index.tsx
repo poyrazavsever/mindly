@@ -26,7 +26,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-primary">Ajanların</h1>
         <button
-          className="px-5 py-2 rounded-full bg-primary text-secondary font-semibold hover:bg-primary/90 transition-colors"
+          className="px-5 py-2 rounded-full bg-primary text-secondary font-semibold hover:bg-primary/90 transition-colors cursor-pointer"
           onClick={() => setShowModal(true)}
         >
           Yeni Ajan Ekle
