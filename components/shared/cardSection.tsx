@@ -4,23 +4,23 @@ import { FaBrain, FaRobot, FaBookOpen, FaRegLightbulb } from 'react-icons/fa'
 const agents = [
     {
         icon: <FaBrain size={32} className="text-primary" />,
-        title: 'Productivity Agent',
-        desc: 'Plan your daily tasks, create reminders, and boost your productivity.',
+        title: 'Verimlilik Asistanı',
+        desc: 'Günlük görevlerinizi planlayın, hatırlatıcılar oluşturun ve verimliliğinizi artırın.',
     },
     {
         icon: <FaRobot size={32} className="text-primary" />,
-        title: 'Chatbot Agent',
-        desc: 'Create a personal assistant that answers your questions and chats with you.',
+        title: 'Sohbet Botu',
+        desc: 'Sorularınızı yanıtlayan ve sizinle sohbet eden kişisel bir asistan oluşturun.',
     },
     {
         icon: <FaBookOpen size={32} className="text-primary" />,
-        title: 'Knowledge Agent',
-        desc: 'Build a smart guide that provides information or suggests resources on a specific topic.',
+        title: 'Bilgi Asistanı',
+        desc: 'Belirli bir konuda bilgi veren veya kaynak öneren akıllı bir rehber oluşturun.',
     },
     {
         icon: <FaRegLightbulb size={32} className="text-primary" />,
-        title: 'Idea Generator',
-        desc: 'Create an AI assistant that generates creative ideas and solutions.',
+        title: 'Fikir Üretici',
+        desc: 'Yaratıcı fikirler ve çözümler üreten bir yapay zekâ asistanı oluşturun.',
     },
 ]
 
@@ -28,7 +28,7 @@ const CardSection = () => {
     return (
         <section className="w-full py-32 flex flex-col items-center">
             <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
-                What Can You Create?
+                Neler Oluşturabilirsin?
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 w-full max-w-6xl">
                 {agents.map((agent, i) => (

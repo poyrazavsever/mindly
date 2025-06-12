@@ -7,23 +7,23 @@ const HeroSection = () => {
             {/* Sol taraf: Başlık, metin ve butonlar */}
             <div className="flex flex-col items-start gap-4">
                 <h1 className="text-5xl md:text-6xl font-semibold text-primary">
-                    Mindly, Meet Your <span className='font-bold italic text-gray-300'>AI Assistant</span>
+                    Mindly, <span className='font-bold italic text-gray-400'>Yapay Zekâ Asistanınla</span> Tanış
                 </h1>
                 <p className="text-lg text-primary/80 max-w-xl">
-                    Mindly is an AI platform that makes your daily life easier, inspires you, and increases your productivity. Start exploring now!
+                    Mindly, günlük yaşamını kolaylaştıran, sana ilham veren ve verimliliğini artıran bir yapay zekâ platformudur. Hemen keşfetmeye başla!
                 </p>
                 <div className="flex gap-4 mt-2">
                     <a
                         href="/signup"
                         className="px-6 py-1 rounded-full bg-primary text-secondary font-semibold hover:bg-primary/90 transition-colors"
                     >
-                        Get Started
+                        Başla
                     </a>
                     <a
                         href="/product"
                         className="px-6 py-1 rounded-full border border-primary text-primary font-semibold hover:bg-primary hover:text-secondary transition-colors"
                     >
-                        Learn More
+                        Daha Fazla Bilgi
                     </a>
                 </div>
             </div>
@@ -32,7 +32,7 @@ const HeroSection = () => {
             <div className="flex flex-col items-center mt-10 md:mt-0 max-w-sm">
                 <img
                     src="/images/hero-image.png"
-                    alt="Mindly platform illustration"
+                    alt="Mindly platform illüstrasyonu"
                     className="max-w-xs md:max-w-md rounded-xl"
                 />
 

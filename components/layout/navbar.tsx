@@ -34,10 +34,10 @@ const Navbar = () => {
 
                 {/* Navigation Links */}
                 <div className='flex items-center gap-4'>
-                    <a href="/product" className={linkStyle}>Product</a>
-                    <a href="/docs" className={linkStyle}>Docs</a>
+                    <a href="/product" className={linkStyle}>Ürün</a>
+                    <a href="/docs" className={linkStyle}>Dokümanlar</a>
                     <a href="/blog" className={linkStyle}>Blog</a>
-                    <a href="/community" className={linkStyle}>Community</a>
+                    <a href="/community" className={linkStyle}>Topluluk</a>
                 </div>
 
             </div>
@@ -61,14 +61,14 @@ const Navbar = () => {
                             href="/signup"
                             className="text-neutral-300 font-medium hover:text-white transition-colors"
                         >
-                            Sign Up
+                            Kayıt Ol
                         </a>
                         {/* Get Started Button */}
                         <a
                             href="/login"
                             className="px-4 py-1 bg-primary text-secondary rounded-full font-medium hover:bg-primary/80 transition-colors"
                         >
-                            Get Started
+                            Giriş Yap
                         </a>
                     </>
                 ) : (
@@ -76,7 +76,7 @@ const Navbar = () => {
                         href="/dashboard"
                         className="px-4 py-1 bg-primary text-secondary rounded-full font-medium hover:bg-primary/80 transition-colors"
                     >
-                        Dashboard
+                        Panel
                     </a>
                 )}
             </div>
