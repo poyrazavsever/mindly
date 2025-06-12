@@ -23,7 +23,7 @@ const icons = [
     { value: 'palette', icon: <FaPalette size={28} /> },
 ]
 
-const AgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data: any) => void }) => {
+const AddAgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data: any) => void }) => {
     const [form, setForm] = useState({
         name: '',
         desc: '',
@@ -169,4 +169,4 @@ const AgentModal = ({ onClose, onSave }: { onClose?: () => void; onSave?: (data:
     )
 }
 
-export default AgentModal
+export default AddAgentModal
