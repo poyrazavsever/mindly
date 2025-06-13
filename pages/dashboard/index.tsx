@@ -56,7 +56,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="max-w-4xl min-w-4xl mx-auto px-4">
+    <div className="max-w-6xl min-w-6xl px-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-primary">Ajanların</h1>
         <button
