@@ -16,7 +16,7 @@ const Chat = () => {
             }
             const { data } = await supabase
                 .from('agents')
-                .select('id, name')
+                .select('*')
                 .eq('user_id', user.id)
                 .order('created_at', { ascending: false })
             setAgents(data || [])
@@ -32,8 +32,12 @@ const Chat = () => {
         localStorage.setItem('selectedAgentId', e.target.value)
     }
 
+    
+    const agent = agents.find(a => String(a.id) === String(selectedAgent))
+    console.log('agent:', agent)
+
     return (
-        <div className=" min-w-5xl py-8 px-4">
+        <div className="min-w-5xl py-8 px-4">
             <div className="flex items-center justify-between gap-4 mb-8">
                 <h2 className="text-lg text-primary font-bold mb-2">Ajan Seç</h2>
                 <select
@@ -48,7 +52,7 @@ const Chat = () => {
                 </select>
             </div>
 
-            <ChatBot />
+            <ChatBot agent={agent} />
         </div>
     )
 }
