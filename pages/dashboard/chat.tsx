@@ -37,7 +37,7 @@ const Chat = () => {
     console.log('agent:', agent)
 
     return (
-        <div className="min-w-5xl py-8 px-4">
+        <div className="min-w-5xl px-4">
             <div className="flex items-center justify-between gap-4 mb-8">
                 <h2 className="text-lg text-primary font-bold mb-2">Ajan Seç</h2>
                 <select

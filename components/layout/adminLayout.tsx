@@ -6,7 +6,7 @@ const AdminLayout = ({children}: {children: ReactNode}) => {
     <div>
       <Sidebar />
       
-      <main className='pl-80 pt-24 min-h-screen bg-background'>
+      <main className='pl-80 pt-12 min-h-screen bg-background'>
         {children}
       </main>
     </div>
