@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { FaRobot, FaComments, FaTasks, FaCalendarAlt, FaLightbulb, FaChartBar, FaCog } from 'react-icons/fa'
+import { FaRobot, FaComments, FaTasks, FaCalendarAlt, FaLightbulb, FaChartBar, FaCog, FaMoneyBillWaveAlt, FaLink } from 'react-icons/fa'
 import classNames from 'classnames'
 
 const sidebarLinks = [
@@ -33,6 +33,16 @@ const sidebarLinks = [
     href: '/dashboard/reports',
     label: 'Raporlar',
     icon: <FaChartBar size={20} />,
+  },
+  {
+    href: '/dashboard/market',
+    label: 'Market',
+    icon: <FaMoneyBillWaveAlt size={20} />,
+  },
+  {
+    href: '/dashboard/connections',
+    label: 'Bağlantılar',
+    icon: <FaLink size={20} />,
   },
   {
     href: '/dashboard/settings',
