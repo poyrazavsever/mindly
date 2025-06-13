@@ -1,44 +1,63 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
-const messages = [
-    {
-        created_at: '2024-06-13T10:00:00Z',
-        role: 'agent',
-        content: 'Merhaba! Sana nasıl yardımcı olabilirim?',
-    },
-    {
-        created_at: '2024-06-13T10:00:10Z',
-        role: 'user',
-        content: 'Bugünkü ajandamı özetler misin?',
-    },
-    {
-        created_at: '2024-06-13T10:00:12Z',
-        role: 'agent',
-        content: 'Tabii! Bugün saat 14:00\'te bir toplantın var. Ayrıca 16:00\'da bir görev hatırlatıcın bulunuyor.',
-    },
-    {
-        created_at: '2024-06-13T10:00:10Z',
-        role: 'user',
-        content: 'Bugünkü ajandamı özetler misin?',
-    },
-    {
-        created_at: '2024-06-13T10:00:12Z',
-        role: 'agent',
-        content: 'Tabii! Bugün saat 14:00\'te bir toplantın var. Ayrıca 16:00\'da bir görev hatırlatıcın bulunuyor.',
-    },
-    {
-        created_at: '2024-06-13T10:00:10Z',
-        role: 'user',
-        content: 'Bugünkü ajandamı özetler misin?',
-    },
-]
+type Message = {
+    created_at: string
+    role: 'user' | 'assistant' | 'system'
+    content: string
+}
 
-const ChatBot = () => {
+const ChatBot = ({ agent }: { agent: any }) => {
+    const [messages, setMessages] = useState<Message[]>([])
+    const [input, setInput] = useState('')
+    const [loading, setLoading] = useState(false)
     const bottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [])
+    }, [messages])
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!input.trim()) return
+
+        const userMessage: Message = {
+            created_at: new Date().toISOString(),
+            role: 'user',
+            content: input,
+        }
+        setMessages((prev) => [...prev, userMessage])
+        setInput('')
+        setLoading(true)
+
+        try {
+            const res = await fetch('/api/chatBotGpt', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    messages: [...messages, userMessage],
+                    agent,
+                }),
+            })
+            const data = await res.json()
+            if (res.ok && data.content) {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        created_at: new Date().toISOString(),
+                        role: 'assistant',
+                        content: data.content,
+                    },
+                ])
+            } else {
+                toast.error(data.error || 'Bir hata oluştu.')
+            }
+        } catch (err) {
+            toast.error('Bir hata oluştu.')
+        } finally {
+            setLoading(false)
+        }
+    }
 
     // Mesajları created_at'e göre sırala
     const sortedMessages = [...messages].sort(
@@ -71,18 +90,21 @@ const ChatBot = () => {
                 ))}
                 <div ref={bottomRef} />
             </div>
-            <form className="flex gap-2 mt-4">
+            <form className="flex gap-2 mt-4" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Mesajınızı yazın..."
                     className="flex-1 px-4 py-2 rounded-full bg-background border border-primary/30 text-primary placeholder:text-primary/50 focus:outline-none focus:border-primary"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                    disabled={loading}
                 />
                 <button
                     type="submit"
                     className="px-5 py-2 rounded-full bg-primary text-secondary font-semibold hover:bg-primary/90 transition-colors"
-                    disabled
+                    disabled={loading || !input.trim()}
                 >
-                    Gönder
+                    {loading ? 'Gönderiliyor...' : 'Gönder'}
                 </button>
             </form>
         </div>
