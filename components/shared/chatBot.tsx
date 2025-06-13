@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabaseClient'
 import toast from 'react-hot-toast'
 
 type Message = {
@@ -14,18 +15,61 @@ const ChatBot = ({ agent }: { agent: any }) => {
     const bottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [messages])
+        const loadMessages = async () => {
+            if (!agent) return
+
+            const { data: { user } } = await supabase.auth.getUser()
+            if (!user) return
+
+            const { data, error } = await supabase
+                .from('messages')
+                .select('*')
+                .eq('agent_id', agent.id)
+                .eq('user_id', user.id)
+                .order('created_at', { ascending: true })
+
+            if (error) {
+                toast.error('Mesajlar yüklenemedi.')
+                return
+            }
+
+            setMessages(data || [])
+        }
+
+        loadMessages()
+    }, [agent])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (!input.trim()) return
+        if (!input.trim() || !agent) return
+
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            toast.error('Oturum açmanız gerekiyor.')
+            return
+        }
 
         const userMessage: Message = {
             created_at: new Date().toISOString(),
             role: 'user',
             content: input,
         }
+
+        // Mesajı Supabase'e kaydet
+        const { error: saveError } = await supabase
+            .from('messages')
+            .insert({
+                agent_id: agent.id,
+                user_id: user.id,
+                role: 'user',
+                content: input,
+            })
+
+        if (saveError) {
+            toast.error('Mesaj kaydedilemedi.')
+            return
+        }
+
         setMessages((prev) => [...prev, userMessage])
         setInput('')
         setLoading(true)
@@ -41,6 +85,21 @@ const ChatBot = ({ agent }: { agent: any }) => {
             })
             const data = await res.json()
             if (res.ok && data.content) {
+                // Bot yanıtını Supabase'e kaydet
+                const { error: botSaveError } = await supabase
+                    .from('messages')
+                    .insert({
+                        agent_id: agent.id,
+                        user_id: user.id,
+                        role: 'assistant',
+                        content: data.content,
+                    })
+
+                if (botSaveError) {
+                    toast.error('Bot yanıtı kaydedilemedi.')
+                    return
+                }
+
                 setMessages((prev) => [
                     ...prev,
                     {
