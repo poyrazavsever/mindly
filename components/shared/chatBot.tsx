@@ -141,7 +141,7 @@ const ChatBot = ({ agent }: { agent: any }) => {
               `}
                         >
                             <div className="text-sm">{msg.content}</div>
-                            <div className="text-xs text-primary/50 mt-1 text-right">
+                            <div className="text-xs text-secondary mt-1 text-right">
                                 {new Date(msg.created_at).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
                             </div>
                         </div>
